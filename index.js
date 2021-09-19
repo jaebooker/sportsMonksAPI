@@ -21,6 +21,9 @@ app.get('/getPrice', async (req, res) => {
     let bnb = await fetch(`https://api.twelvedata.com/price?symbol=bnb/usd&apikey=${process.env.API_KEY}`)
     let bnbResponse = await bnb.json();
 
+    // Website you wish to allow to connect
+    res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
+
     res.send([
       {name: 'btc/usd', price: btcResponse.price},
       {name: 'eth/usd', price: ethResponse.price},
