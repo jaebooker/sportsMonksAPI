@@ -26,13 +26,12 @@ app.get('/getPrice', async (req, res) => {
     // Website you wish to allow to connect
     res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
 
-
     res.send([
-      {name: 'btc/usd', price: btcResponse.price},
-      {name: 'eth/usd', price: ethResponse.price},
-      {name: 'ada/usd', price: adaResponse.price},
-      {name: 'bnb/usd', price: bnbResponse.price},
-      {name: 'algo/usd', price: algoResponse.price},
+      {name: 'btc/usd', price: parseFloat(btcResponse.price)},
+      {name: 'eth/usd', price: parseFloat(ethResponse.price)},
+      {name: 'ada/usd', price: parseFloat(adaResponse.price)},
+      {name: 'bnb/usd', price: parseFloat(bnbResponse.price)},
+      {name: 'algo/usd', price: parseFloat(algoResponse.price)},
     ]);
   })
 
