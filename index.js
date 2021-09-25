@@ -6,7 +6,6 @@ const port = process.env.PORT || 80
 
 
 
-
 app.get('/getPrice', async (req, res) => {
     console.log(req.query);
     let btc = await fetch(`https://api.twelvedata.com/price?symbol=btc/usd&apikey=${process.env.API_KEY}`)
@@ -20,15 +19,20 @@ app.get('/getPrice', async (req, res) => {
 
     let bnb = await fetch(`https://api.twelvedata.com/price?symbol=bnb/usd&apikey=${process.env.API_KEY}`)
     let bnbResponse = await bnb.json();
+    
+    let algo = await fetch(`https://api.twelvedata.com/price?symbol=algo/usd&apikey=${process.env.API_KEY}`)
+    let algoResponse = await algo.json();
 
     // Website you wish to allow to connect
     res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
+
 
     res.send([
       {name: 'btc/usd', price: btcResponse.price},
       {name: 'eth/usd', price: ethResponse.price},
       {name: 'ada/usd', price: adaResponse.price},
       {name: 'bnb/usd', price: bnbResponse.price},
+      {name: 'algo/usd', price: algoResponse.price},
     ]);
   })
 
