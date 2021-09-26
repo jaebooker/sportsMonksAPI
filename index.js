@@ -1,9 +1,9 @@
 require('dotenv').config();
 const fetch = (...args) => import('node-fetch').then(({default: fetch}) => fetch(...args));
+const { parse } = require('dotenv');
 const express = require('express')
 const app = express()
 const port = process.env.PORT || 80
-
 
 
 app.get('/getPrice', async (req, res) => {
@@ -34,6 +34,42 @@ app.get('/getPrice', async (req, res) => {
       {name: 'algo/usd', price: parseFloat(algoResponse.price)},
     ]);
   })
+
+  app.get('/getWeather', async (req, res) => {
+    console.log(req.query);
+
+    let toronto = await fetch(`http://api.openweathermap.org/data/2.5/weather?q=toronto&units=metric&appid=${process.env.WEATHER_API_KEY}`);
+    let torontoResponse = await toronto.json();
+    
+    let london = await fetch(`http://api.openweathermap.org/data/2.5/weather?q=london&units=metric&appid=${process.env.WEATHER_API_KEY}`);
+    let londonResponse = await london.json();
+   
+    let helsinki = await fetch(`http://api.openweathermap.org/data/2.5/weather?q=helsinki&units=metric&appid=${process.env.WEATHER_API_KEY}`);
+    let helsinkiResponse = await helsinki.json();
+   
+    let cairo = await fetch(`http://api.openweathermap.org/data/2.5/weather?q=cairo&units=metric&appid=${process.env.WEATHER_API_KEY}`);
+    let cairoResponse = await cairo.json();
+
+    res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
+  
+    res.send([
+      { name: 'toronto', temp: parseFloat(torontoResponse.main.temp)},
+      { name: 'london', temp: parseFloat(londonResponse.main.temp)},
+      { name: 'helsinki', temp: parseFloat(helsinkiResponse.main.temp)},
+      { name: 'cairo', temp: parseFloat(cairoResponse.main.temp)},
+      ])
+   
+
+    // res.send([
+    //   {name: 'btc/usd', price: parseFloat(btcResponse.price)},
+    //   {name: 'eth/usd', price: parseFloat(ethResponse.price)},
+    //   {name: 'ada/usd', price: parseFloat(adaResponse.price)},
+    //   {name: 'bnb/usd', price: parseFloat(bnbResponse.price)},
+    //   {name: 'algo/usd', price: parseFloat(algoResponse.price)},
+    // ]);
+  })
+
+
 
 app.listen(port, () => {
     console.log(`Example app listening at http://localhost:${port}`)
