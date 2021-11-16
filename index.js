@@ -6,34 +6,70 @@ const app = express()
 const port = process.env.PORT || 80
 
 
-app.get('/getPrice', async (req, res) => {
-    console.log(req.query);
-    let btc = await fetch(`https://api.twelvedata.com/price?symbol=btc/usd&apikey=${process.env.API_KEY}`)
-    let btcResponse = await btc.json();
+app.get('/getPriceBTC', async (req, res) => {
+  console.log(req.query);
+  let btc = await fetch(`https://api.twelvedata.com/price?symbol=btc/usd&apikey=${process.env.API_KEY}`)
+  let btcResponse = await btc.json();
 
-    let eth = await fetch(`https://api.twelvedata.com/price?symbol=eth/usd&apikey=${process.env.API_KEY}`)
-    let ethResponse = await eth.json();
+  // Website you wish to allow to connect
+  res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
 
-    let ada = await fetch(`https://api.twelvedata.com/price?symbol=ada/usd&apikey=${process.env.API_KEY}`)
-    let adaResponse = await ada.json();
+  res.send([
+    {name: 'btc/usd', price: parseFloat(btcResponse.price)}
+  ]);
+})
 
-    let bnb = await fetch(`https://api.twelvedata.com/price?symbol=bnb/usd&apikey=${process.env.API_KEY}`)
-    let bnbResponse = await bnb.json();
-    
-    let algo = await fetch(`https://api.twelvedata.com/price?symbol=algo/usd&apikey=${process.env.API_KEY}`)
-    let algoResponse = await algo.json();
+app.get('/getPriceETH', async (req, res) => {
+  console.log(req.query);
+  let eth = await fetch(`https://api.twelvedata.com/price?symbol=eth/usd&apikey=${process.env.API_KEY}`)
+  let ethResponse = await eth.json();
 
-    // Website you wish to allow to connect
-    res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
+  // Website you wish to allow to connect
+  res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
 
-    res.send([
-      {name: 'btc/usd', price: parseFloat(btcResponse.price)},
-      {name: 'eth/usd', price: parseFloat(ethResponse.price)},
-      {name: 'ada/usd', price: parseFloat(adaResponse.price)},
-      {name: 'bnb/usd', price: parseFloat(bnbResponse.price)},
-      {name: 'algo/usd', price: parseFloat(algoResponse.price)},
-    ]);
-  })
+  res.send([
+    {name: 'eth/usd', price: parseFloat(ethResponse.price)}
+  ]);
+})
+
+app.get('/getPriceADA', async (req, res) => {
+  console.log(req.query);
+  let ada = await fetch(`https://api.twelvedata.com/price?symbol=ada/usd&apikey=${process.env.API_KEY}`)
+  let adaResponse = await ada.json();
+
+  // Website you wish to allow to connect
+  res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
+
+  res.send([
+    {name: 'ada/usd', price: parseFloat(adaResponse.price)}
+  ]);
+})
+
+app.get('/getPriceBNB', async (req, res) => {
+  console.log(req.query);
+  let bnb = await fetch(`https://api.twelvedata.com/price?symbol=bnb/usd&apikey=${process.env.API_KEY}`)
+  let bnbResponse = await bnb.json();
+
+  // Website you wish to allow to connect
+  res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
+
+  res.send([
+    {name: 'bnb/usd', price: parseFloat(bnbResponse.price)}
+  ]);
+})
+
+app.get('/getPriceALGO', async (req, res) => {
+  console.log(req.query);
+  let algo = await fetch(`https://api.twelvedata.com/price?symbol=algo/usd&apikey=${process.env.API_KEY}`)
+  let algoResponse = await algo.json();
+
+  // Website you wish to allow to connect
+  res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
+
+  res.send([
+    {name: 'algo/usd', price: parseFloat(algoResponse.price)}
+  ]);
+})
 
   app.get('/getWeather', async (req, res) => {
     console.log(req.query);
@@ -58,15 +94,6 @@ app.get('/getPrice', async (req, res) => {
       { name: 'helsinki', temp: parseFloat(helsinkiResponse.main.temp)},
       { name: 'cairo', temp: parseFloat(cairoResponse.main.temp)},
       ])
-   
-
-    // res.send([
-    //   {name: 'btc/usd', price: parseFloat(btcResponse.price)},
-    //   {name: 'eth/usd', price: parseFloat(ethResponse.price)},
-    //   {name: 'ada/usd', price: parseFloat(adaResponse.price)},
-    //   {name: 'bnb/usd', price: parseFloat(bnbResponse.price)},
-    //   {name: 'algo/usd', price: parseFloat(algoResponse.price)},
-    // ]);
   })
 
 
