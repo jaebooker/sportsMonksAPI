@@ -7,7 +7,7 @@ const port = process.env.PORT || 80
 
 app.get('/', async (req, res) => {
   console.log(req.query);
-  let sports = await fetch(`https://app.sportdataapi.com/api/v1/soccer/matches?apikey=${process.env.WEATHER_API_KEY}&season_id=496&date_from=2020-09-19`)
+  let sports = await fetch(`https://soccer.sportmonks.com/api/v2.0/predictions/leagues?apikey=${process.env.API_KEY}`)
   let sportsResponse = await sports.json();
 
   // Website you wish to allow to connect

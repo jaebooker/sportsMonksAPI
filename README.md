@@ -1,7 +1,7 @@
-# Sports Data API
+# Sports Predictions API
 
-A simple API that provides sports data in a JSON based REST API. This project is in conjunction with the Algoracle Project.
+A simple API that provides sports predictions in a JSON based REST API. This project is in conjunction with the Algoracle Project.
 
-Sports Data API documentation can be found at:
-    https://app.sportdataapi.com/documentation
+SportsMonks API documentation can be found at:
+    https://football-postman.sportmonks.com/
 
