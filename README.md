@@ -1,11 +1,7 @@
-# TwelveData and Open Weather Map
+# Sports Data API
 
-A simple API that provides crypto prices and weather info in a JSON based REST API.
+A simple API that provides sports data in a JSON based REST API. This project is in conjunction with the Algoracle Project.
 
-Twelve Data documentation can be found at 
+Sports Data API documentation can be found at:
+    https://app.sportdataapi.com/documentation
 
-https://twelvedata.com/docs
-
-Open Weather Map data can be found at:
-
-https://openweathermap.org/current
